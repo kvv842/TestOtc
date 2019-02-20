@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{D31F9E7E-66E5-4EEC-8CA9-816946B0194B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B46EC731-1C75-49F2-884A-922210EF3325}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "Services\AuthService\AuthService.csproj", "{051A5F79-73AE-4CC3-977F-4BB25DBFA5AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D31F9E7E-66E5-4EEC-8CA9-816946B0194B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D31F9E7E-66E5-4EEC-8CA9-816946B0194B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D31F9E7E-66E5-4EEC-8CA9-816946B0194B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D31F9E7E-66E5-4EEC-8CA9-816946B0194B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051A5F79-73AE-4CC3-977F-4BB25DBFA5AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051A5F79-73AE-4CC3-977F-4BB25DBFA5AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051A5F79-73AE-4CC3-977F-4BB25DBFA5AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051A5F79-73AE-4CC3-977F-4BB25DBFA5AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{051A5F79-73AE-4CC3-977F-4BB25DBFA5AC} = {B46EC731-1C75-49F2-884A-922210EF3325}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {827CCABF-0D3B-47D7-BDC7-901307FE5D0A}
+	EndGlobalSection
+EndGlobal
