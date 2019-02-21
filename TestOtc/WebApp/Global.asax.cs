@@ -25,6 +25,8 @@ namespace WebApp
             NinjectModule registrations = new NinjectRegistrations();
             var kernel = new StandardKernel(registrations);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
+            AuthService.Utils.Helpers.InitializerDb();
         }
     }
 }

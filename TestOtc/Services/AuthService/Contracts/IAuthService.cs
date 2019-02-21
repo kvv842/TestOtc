@@ -5,6 +5,6 @@ namespace AuthService.Contracts
 {
     public interface IAuthService
     {
-        Task<bool> AuthAsync(AuthRequest authRequest);
+        Task<AuthResponse> AuthAsync(AuthRequest authRequest);
     }
 }

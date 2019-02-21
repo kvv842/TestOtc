@@ -1,8 +1,5 @@
-﻿using Ninject.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using AuthService.Contracts;
+using Ninject.Modules;
 
 namespace WebApp.Utils
 {
@@ -10,7 +7,7 @@ namespace WebApp.Utils
     {
         public override void Load()
         {
-           // Bind<IRepository>().To<BookRepository>();
+            Bind<IAuthService>().To<AuthService.AuthService>();
         }
     }
 }
