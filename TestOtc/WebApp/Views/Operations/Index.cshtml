@@ -5,3 +5,138 @@
 
 <h2>Operation</h2>
 
+<div class="row">
+    <div class="form-horizontal form-widgets col-xs-4 col-xs-offset-4">
+
+        <div class="form-group">
+            <select class="combobox" id="sender-bank">
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select class="combobox">
+                <option></option>
+                <option value="PA">Pennsylvania</option>
+                <option value="CT">Connecticut</option>
+                <option value="NY">New York</option>
+                <option value="MD">Maryland</option>
+                <option value="VA">Virginia</option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            jQuery(function ($) {
+
+                $.getJSON('api/banks', function (data) {
+                    var items = [];
+                    $.each(data, function (key, val) {
+                        items.push("<option id='" + val.id + "'>" + val.name + "</option>");
+                    });
+
+                    $('#sender-bank').append(items);
+
+                    console.log(items);
+                });
+
+                
+
+                /////////////////////
+                ////  UI Elements
+                ////
+                ////UI Buttonsets for navigation, radios, and checkboxes
+                //$('input[type=radio],input[type=checkbox]').parent().buttonset();
+                ////
+                ////UI Buttons
+                //$("button,input[type=submit],input[type=reset]").button();
+                ////
+                ////UI Select Menu with validation
+                //$("#sender-bank").selectmenu({
+                //    width: 225,
+                //    //jQuery UI hides the actual <select> tags, calling on the change event allows you to validate
+                //    change: function () {
+                //        $(this).valid();
+                //    }
+                //});
+                ////
+                ////UI Button with css for text inputs
+                //$("input[type=text]").button().css({
+                //    "text-align": "left",
+                //    "cursor": "text",
+                //});
+                ////
+                ////UI Style the form table
+                //$("table").addClass("ui-widget ui-widget-content ui-corner-all");
+                ////
+                ////UI Dialog
+                //$("#dialog1a,#dialog1b").dialog({
+                //    autoOpen: false,
+                //    show: {
+                //        effect: "fold",
+                //        duration: "slow"
+                //    },
+                //    hide: {
+                //        effect: "clip"
+                //    },
+                //    title: "Instructions",
+                //    width: 400,
+                //    modal: true,
+                //});
+                ////dialog opener for instructions 1a
+                //$("#instructions1a").click(function (e) {
+                //    $("#dialog1a").dialog("open");
+                //});
+                ////
+                ////  End of UI Elements
+                //////////////////////////
+
+                //////////////////////////
+                ////  jQuery form validation
+                ////
+                //// Full names only with optional prefix and suffix
+                //$.validator.addMethod("fullName", function (value, element) {
+                //    return this.optional(element) || /([a-z]{2}\.\s)?([a-z]+\s[a-z]+[^0-9\/\*\+])([a-z]+\.)?/i.test(value);
+                //}, 'Please enter your full name (preffix/suffixes are optional).');
+                //$("#formauth").validate({
+                //    //required to validate jQuery UI select menu
+                //    ignore: [],
+                //    //rules for all form fields
+                //    rules: {
+                //        login: { required: true, },
+                //        pasword2: { required: true, },
+                //        food1a_1: {
+                //            required: function (element) {
+                //                return $("#food1a").val() == 1;
+                //            }
+                //        }
+                //    },
+                //    errorPlacement: function (error, element) {
+                //        if (element.is(":radio") || element.is(":checkbox")) {
+                //            error.appendTo(element.parent());
+                //        } else if (element.is("select")) {
+                //            error.appendTo(element.parent().next());
+                //        } else {
+                //            error.insertAfter(element);
+                //        }
+                //    },
+                //    errorClass: "ui-tooltip ui-widget ui-corner-all ui-widget-content",
+                //    errorElement: "span",
+                //    highlight: function (element, errorClass, validClass) { $(element).addClass("ui-widget-content").removeClass(validClass); },
+                //    unhighlight: function (element, errorClass, validClass) { $(element).removeClass("ui-widget-content").addClass(validClass); },
+                //});
+                //
+                //  End of Form Validation
+                ///////////////////////////////
+
+                console.log('wer');
+
+            });
+        });
+    </script>
+
+}

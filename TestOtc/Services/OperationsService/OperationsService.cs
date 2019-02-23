@@ -26,5 +26,12 @@ namespace OperationsService
             var banks = Mapper.Map<IList<Bank>>(dbBanks);
             return banks;
         }
+
+        public async Task<IList<Invoice>> GetInvoicesAsync(Guid bankId)
+        {
+            var dbInvoices = await _operationsDbContext.Invoices.Where(a => a.BankId == bankId).ToListAsync();
+            var invoices = Mapper.Map<IList<Invoice>>(dbInvoices);
+            return invoices;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using OperationsService.Contracts;
 using OperationsService.Contracts.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -7,20 +8,20 @@ using System.Web.Http;
 namespace WebApp.Controllers.Api
 {
     //[Authorize]
-    public class BanksController : ApiController
+    public class InvoicesController : ApiController
     {
         private readonly IOperationsService _operationsService;
 
-        public BanksController(IOperationsService operationsService)
+        public InvoicesController(IOperationsService operationsService)
         {
             _operationsService = operationsService;
         }
 
         // GET: Operations
-        public async Task<IEnumerable<Bank>> GetBanksAsync()
+        public async Task<IEnumerable<Invoice>> GetInvoicesAsync(Guid id)
         {
-            var banks = await _operationsService.GetBanksAsync();
-            return banks;
+            var invoices = await _operationsService.GetInvoicesAsync(id);
+            return invoices;
         }
     }
 }

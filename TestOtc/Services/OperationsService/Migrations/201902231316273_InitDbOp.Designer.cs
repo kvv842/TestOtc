@@ -13,7 +13,7 @@ namespace OperationsService.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201902230654075_InitDbOp"; }
+            get { return "201902231316273_InitDbOp"; }
         }
         
         string IMigrationMetadata.Source

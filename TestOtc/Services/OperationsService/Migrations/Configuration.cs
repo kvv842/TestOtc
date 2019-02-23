@@ -24,28 +24,36 @@ namespace OperationsService.Migrations
             //  to avoid creating duplicate seed data.
 
             // Banks
+            var sberbank = new DbBank
+            {
+                Id = Guid.Parse("{569E5810-82BD-498C-AB21-2E1E8593A7F0}"),
+                Name = "Сбербанк",
+                InterestInternalTransfer = 0,
+                InterestExternalTransfer = 1,
+                AdditionalActionsType = DbAdditionalActionsType.SendTransactionsTaxOffice
+            };
+
+            var vtbbank = new DbBank
+            {
+                Id = Guid.Parse("{00C7DA8B-A7BE-446D-AD5F-E41AF650B576}"),
+                Name = "Втб",
+                InterestInternalTransfer = 0,
+                InterestExternalTransfer = 2,
+                AdditionalActionsType = DbAdditionalActionsType.SendTransactionPartnerBank
+            };
+
+            var alfabank = new DbBank
+            {
+                Id = Guid.Parse("{264848B8-4782-4FC1-A265-D255CDE56911}"),
+                Name = "Альфабанк",
+                InterestInternalTransfer = 1,
+                InterestExternalTransfer = 2.5,
+                AdditionalActionsType = DbAdditionalActionsType.DisplayWindowConfirmingOperation
+            };
+
             var banks = new List<DbBank>
             {
-                new DbBank {
-                    Name = "Сбербанк",
-                    InterestInternalTransfer = 0,
-                    InterestExternalTransfer = 1,
-                    AdditionalActionsType = DbAdditionalActionsType.SendTransactionsTaxOffice
-                },
-
-                new DbBank {
-                    Name = "Втб",
-                    InterestInternalTransfer = 0,
-                    InterestExternalTransfer = 2,
-                    AdditionalActionsType = DbAdditionalActionsType.SendTransactionPartnerBank
-                },
-
-                new DbBank {
-                    Name = "Альфабанк",
-                    InterestInternalTransfer = 1,
-                    InterestExternalTransfer = 2.5,
-                    AdditionalActionsType = DbAdditionalActionsType.DisplayWindowConfirmingOperation
-                },
+                sberbank, vtbbank, alfabank
             };
 
             banks.ForEach(s => context.Banks.AddOrUpdate(p => p.Name, s));
@@ -81,6 +89,56 @@ namespace OperationsService.Migrations
             };
 
             matrix.ForEach(s => context.Matrices.AddOrUpdate(p => p.Id, s));
+
+            var invoices = new List<DbInvoice>
+            {
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 1000,
+                    Number = "58000000000000000001",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 1000,
+                    Number = "58000000000000000002",
+                },
+
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 5000,
+                    Number = "58000000000000000003",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000004",
+                },
+
+                new DbInvoice
+                {
+                    BankId = vtbbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 5646.65,
+                    Number = "68000000000000000001",
+                },
+                new DbInvoice
+                {
+                    BankId = vtbbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 54688686,
+                    Number = "68000000000000000002",
+                },
+            };
+
+            invoices.ForEach(s => context.Invoices.AddOrUpdate(p => p.Number, s));
 
             context.SaveChanges();
         }
