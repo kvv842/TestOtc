@@ -55,5 +55,32 @@ namespace WebApp.Controllers
             ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
             return View("login", loginModel);
         }
+
+        public ActionResult IsAuth()
+        {
+            var model = new IsAuthModel()
+            {
+                IsAuthen = HttpContext.User.Identity.IsAuthenticated,
+            };
+
+            return PartialView(model);
+        }
+
+        [Route("logout")]
+        [HttpGet]
+        [Authorize]
+        public ActionResult Logout()
+        {
+            return View();
+        }
+
+        [Route("logout")]
+        [HttpPost]
+        [Authorize]
+        public ActionResult PostLogout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -3,7 +3,7 @@ namespace AuthService.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class IntialDb : DbMigration
+    public partial class InitDb : DbMigration
     {
         public override void Up()
         {
@@ -11,7 +11,7 @@ namespace AuthService.Migrations
                 "auth.User",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false, identity: true),
                         Login = c.String(nullable: false, maxLength: 25),
                         Password = c.String(nullable: false, maxLength: 25),
                     })

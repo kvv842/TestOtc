@@ -23,7 +23,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Auth")</li>
+                    <li>@Html.ActionLink("Операции", "Index", "Operations")</li>
+                    <li>@{Html.RenderAction("IsAuth", "Auth"); }</li>
                 </ul>
             </div>
         </div>
@@ -39,11 +40,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryunajax")
 
-    @*@Scripts.Render("https://kendo.cdn.telerik.com/2017.1.223/js/kendo.web.min.js")
-    @Scripts.Render("https://kendo.cdn.telerik.com/2017.1.223/js/kendo.aspnetmvc.min.js")
-    @Scripts.Render("https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js")
-    @Scripts.Render("~/bundles/kendo")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -7,13 +7,13 @@ namespace AuthService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class IntialDb : IMigrationMetadata
+    public sealed partial class InitDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(IntialDb));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201902210952527_IntialDb"; }
+            get { return "201902221417046_InitDb"; }
         }
         
         string IMigrationMetadata.Source

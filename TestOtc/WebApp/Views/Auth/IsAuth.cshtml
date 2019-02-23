@@ -1,0 +1,10 @@
+﻿@model WebApp.Models.Auth.IsAuthModel
+
+@if (!Model.IsAuthen)
+{
+    @Html.ActionLink("Войти", "Login", "Auth");
+}
+else
+{
+    @Html.ActionLink("Выйти", "Logout", "Auth");
+}
