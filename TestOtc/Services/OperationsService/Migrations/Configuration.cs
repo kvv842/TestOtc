@@ -121,6 +121,83 @@ namespace OperationsService.Migrations
                     Ammount = 2000,
                     Number = "58000000000000000004",
                 },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000005",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000006",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000007",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000008",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000009",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000010",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000011",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000012",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000013",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000014",
+                },
+                new DbInvoice
+                {
+                    BankId = sberbank.Id,
+                    InvoiceTypeId = individual.Id,
+                    Ammount = 2000,
+                    Number = "58000000000000000015",
+                },
 
                 new DbInvoice
                 {

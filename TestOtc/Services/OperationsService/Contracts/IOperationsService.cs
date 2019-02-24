@@ -9,6 +9,10 @@ namespace OperationsService.Contracts
     {
         Task<IList<Bank>> GetBanksAsync();
 
-        Task<IList<Invoice>> GetInvoicesAsync(Guid bankId);
+        Task<IList<Invoice>> GetSenderInvoicesAsync(Guid bankId);
+
+        Task<IList<Invoice>> GetRecipientInvoicesAsync(Guid bankId, Guid senderInvoiceId);
+
+        Task TransferAsync(TransferRequest transferRequest);
     }
 }

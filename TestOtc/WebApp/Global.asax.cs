@@ -35,6 +35,7 @@ namespace WebApp
             Mapper.Initialize(configurationExpression =>
             {
                 configurationExpression.AddProfile<OperationsService.Mapping.MapperProfileToDTO>();
+                configurationExpression.AddProfile<Mapping.MapperProfileToViewModel>();
             });
         }
     }

@@ -20,7 +20,7 @@ namespace WebApp.Controllers.Api
         // GET: Operations
         public async Task<IEnumerable<Invoice>> GetInvoicesAsync(Guid id)
         {
-            var invoices = await _operationsService.GetInvoicesAsync(id);
+            var invoices = await _operationsService.GetSenderInvoicesAsync(id);
             return invoices;
         }
     }

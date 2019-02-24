@@ -1,0 +1,22 @@
+﻿@model System.Collections.Generic.IEnumerable<WebApp.Models.Operations.InvoiceModel>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>
+        @item.Number
+    </td>
+    <td>
+        @item.Ammount
+    </td>
+    <td>
+        <button type="button" 
+                class="btn btn-primary" 
+                data-toggle="modal" 
+                data-target="#transferModal" 
+                data-sender-invoice-id="@item.Id"
+                data-sender-invoice-number="@item.Number">Перевести</button>
+    </td>
+
+</tr>
+}

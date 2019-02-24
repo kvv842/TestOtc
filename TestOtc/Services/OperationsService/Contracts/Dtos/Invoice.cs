@@ -5,7 +5,7 @@ namespace OperationsService.Contracts.Dtos
 {
     public class Invoice
     {
-        [JsonProperty("id")]
+        [JsonProperty("invoice_id")]
         public Guid Id { get; set; }
 
         [JsonProperty("number")]

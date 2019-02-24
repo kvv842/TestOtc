@@ -1,0 +1,9 @@
+﻿@model IEnumerable<WebApp.Models.Operations.BankModel>
+
+@foreach (var item in Model)
+{
+    <option id="@item.Id">
+        @item.Name
+    </option>
+}
+

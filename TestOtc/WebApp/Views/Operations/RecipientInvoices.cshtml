@@ -1,0 +1,19 @@
+﻿@model System.Collections.Generic.IEnumerable<WebApp.Models.Operations.InvoiceModel>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>
+        @item.Number
+    </td>
+    <td>
+        @item.Ammount
+    </td>
+    <td>
+        <label class="btn btn-primary">
+            <input type="radio" name="recipientInvoiceId" value="@item.Id" autocomplete="off" checked> Выбрать
+        </label>
+    </td>
+
+</tr>
+}

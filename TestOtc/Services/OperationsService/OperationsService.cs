@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using OperationsService.Contracts;
 using OperationsService.Contracts.Dtos;
+using OperationsService.Contracts.Exceptions;
 using OperationsService.Data;
+using OperationsService.Validators;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -27,11 +29,29 @@ namespace OperationsService
             return banks;
         }
 
-        public async Task<IList<Invoice>> GetInvoicesAsync(Guid bankId)
+        public async Task<IList<Invoice>> GetSenderInvoicesAsync(Guid bankId)
         {
             var dbInvoices = await _operationsDbContext.Invoices.Where(a => a.BankId == bankId).ToListAsync();
             var invoices = Mapper.Map<IList<Invoice>>(dbInvoices);
             return invoices;
+        }
+
+        public async Task<IList<Invoice>> GetRecipientInvoicesAsync(Guid bankId, Guid sendrInvoiceId)
+        {
+            var dbInvoices = await _operationsDbContext.Invoices.Where(a => a.BankId == bankId && a.Id != sendrInvoiceId).ToListAsync();
+            var invoices = Mapper.Map<IList<Invoice>>(dbInvoices);
+            return invoices;
+        }
+
+        public async Task TransferAsync(TransferRequest transferRequest)
+        {
+            var validator = new TransferRequestValidator(_operationsDbContext);
+            var validateResult = validator.Validate(transferRequest);
+
+            if (!validateResult.IsValid)
+                throw new TransferException(validateResult.Errors.Select(a => a.ErrorMessage));
+
+            await Task.CompletedTask;
         }
     }
 }

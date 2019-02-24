@@ -6,134 +6,157 @@
 <h2>Operation</h2>
 
 <div class="row">
-    <div class="form-horizontal form-widgets col-xs-4 col-xs-offset-4">
+    <div class="form-horizontal form-widgets col-xs-12">
 
         <div class="form-group">
-            <select class="combobox" id="sender-bank">
-
-            </select>
+            Выберите банк
+            <select class="combobox" id="sender-bank"></select>
         </div>
 
         <div class="form-group">
-            <select class="combobox">
-                <option></option>
-                <option value="PA">Pennsylvania</option>
-                <option value="CT">Connecticut</option>
-                <option value="NY">New York</option>
-                <option value="MD">Maryland</option>
-                <option value="VA">Virginia</option>
-            </select>
+            <table class="table table-striped table-hover table-bordered" id="sender-invoices-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Номер счета</th>
+                        <th scope="col">Сумма</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="sender-invoices-tbody"></tbody>
+            </table>
         </div>
 
     </div>
 
 </div>
+
+<div class="modal fade" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transferModalLabel">Перевод</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Transfer", "Operations", FormMethod.Post, htmlAttributes: new { id = "transfer_form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="sender-invoice-id" name="senderInvoiceId">
+                    </div>
+                    <div class="form-group">
+                        <label for="sender-invoice-number" class="col-form-label">Отправитель:</label>
+                        <input type="text" class="form-control" id="sender-invoice-number" readonly>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Выберите банк получателя:</label>
+                        <select class="combobox" id="recipient-bank"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Выберите счет получателя:</label>
+                        <table class="table table-striped table-hover table-bordered" id="recipient-invoices-table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Номер счета</th>
+                                    <th scope="col">Сумма</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="recipient-invoices-tbody" data-toggle="buttons"></tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label for="ammount" class="col-form-label">Сумма перевода:</label>
+                        <input type="number" class="form-control" name="ammount" required>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btn-transfer">Перевести</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
             jQuery(function ($) {
 
-                $.getJSON('api/banks', function (data) {
-                    var items = [];
-                    $.each(data, function (key, val) {
-                        items.push("<option id='" + val.id + "'>" + val.name + "</option>");
+                $("#transfer_form").on("submit", function (e) {
+                    var postData = $(this).serializeArray();
+                    var formURL = $(this).attr("action");
+                    $.ajax({
+                        url: formURL,
+                        type: "POST",
+                        data: postData,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data.success)
+                                $('#transferModal').modal('toggle');
+                            else
+                                alert(data.m);
+                        },
+                        error: function (jqXHR, status, error) {
+                            alert(status + ": " + error);
+                        }
                     });
-
-                    $('#sender-bank').append(items);
-
-                    console.log(items);
+                    e.preventDefault();
                 });
 
-                
+                $("#btn-transfer").on('click', function () {
+                    $("#transfer_form").submit();
+                });
 
-                /////////////////////
-                ////  UI Elements
-                ////
-                ////UI Buttonsets for navigation, radios, and checkboxes
-                //$('input[type=radio],input[type=checkbox]').parent().buttonset();
-                ////
-                ////UI Buttons
-                //$("button,input[type=submit],input[type=reset]").button();
-                ////
-                ////UI Select Menu with validation
-                //$("#sender-bank").selectmenu({
-                //    width: 225,
-                //    //jQuery UI hides the actual <select> tags, calling on the change event allows you to validate
-                //    change: function () {
-                //        $(this).valid();
-                //    }
-                //});
-                ////
-                ////UI Button with css for text inputs
-                //$("input[type=text]").button().css({
-                //    "text-align": "left",
-                //    "cursor": "text",
-                //});
-                ////
-                ////UI Style the form table
-                //$("table").addClass("ui-widget ui-widget-content ui-corner-all");
-                ////
-                ////UI Dialog
-                //$("#dialog1a,#dialog1b").dialog({
-                //    autoOpen: false,
-                //    show: {
-                //        effect: "fold",
-                //        duration: "slow"
-                //    },
-                //    hide: {
-                //        effect: "clip"
-                //    },
-                //    title: "Instructions",
-                //    width: 400,
-                //    modal: true,
-                //});
-                ////dialog opener for instructions 1a
-                //$("#instructions1a").click(function (e) {
-                //    $("#dialog1a").dialog("open");
-                //});
-                ////
-                ////  End of UI Elements
-                //////////////////////////
+                $('#transferModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var modal = $(this);
 
-                //////////////////////////
-                ////  jQuery form validation
-                ////
-                //// Full names only with optional prefix and suffix
-                //$.validator.addMethod("fullName", function (value, element) {
-                //    return this.optional(element) || /([a-z]{2}\.\s)?([a-z]+\s[a-z]+[^0-9\/\*\+])([a-z]+\.)?/i.test(value);
-                //}, 'Please enter your full name (preffix/suffixes are optional).');
-                //$("#formauth").validate({
-                //    //required to validate jQuery UI select menu
-                //    ignore: [],
-                //    //rules for all form fields
-                //    rules: {
-                //        login: { required: true, },
-                //        pasword2: { required: true, },
-                //        food1a_1: {
-                //            required: function (element) {
-                //                return $("#food1a").val() == 1;
-                //            }
-                //        }
-                //    },
-                //    errorPlacement: function (error, element) {
-                //        if (element.is(":radio") || element.is(":checkbox")) {
-                //            error.appendTo(element.parent());
-                //        } else if (element.is("select")) {
-                //            error.appendTo(element.parent().next());
-                //        } else {
-                //            error.insertAfter(element);
-                //        }
-                //    },
-                //    errorClass: "ui-tooltip ui-widget ui-corner-all ui-widget-content",
-                //    errorElement: "span",
-                //    highlight: function (element, errorClass, validClass) { $(element).addClass("ui-widget-content").removeClass(validClass); },
-                //    unhighlight: function (element, errorClass, validClass) { $(element).removeClass("ui-widget-content").addClass(validClass); },
-                //});
-                //
-                //  End of Form Validation
-                ///////////////////////////////
+                    var sender_invoice_id = button.data('sender-invoice-id');
 
-                console.log('wer');
+                    modal.find('#sender-invoice-id').val(sender_invoice_id);
+                    modal.find('#sender-invoice-number').val(button.data('sender-invoice-number'));
+
+                    $("#recipient-bank").on('change', function () {
+                        var id = $("#recipient-bank option:selected").attr('id');
+
+                        if (id != null) {
+                            $('#recipient-invoices-table').DataTable().destroy();
+
+                            $("#recipient-invoices-tbody").load(`@Url.Action("RecipientInvoices", "Operations")/${id}?senderInvoiceId=${sender_invoice_id}`, function () {
+                                $('#recipient-invoices-table').DataTable({
+                                    aLengthMenu: [
+                                        [5, 50, 100, 200, -1],
+                                        [5, 50, 100, 200, "All"]
+                                    ],
+                                    iDisplayLength: 5,
+                                    retrieve: true
+                                });
+                            });
+                        }
+
+                    }).load('@Url.Action("banks", "Operations")/', function () {
+                        $("#recipient-bank").change();
+                    });
+
+                });
+
+                $("#sender-bank").on('change', function () {
+                    var id = $("#sender-bank option:selected").attr('id');
+
+                    if (id != null) {
+                        $('#sender-invoices-table').DataTable().destroy();
+                        $("#sender-invoices-tbody").load(`@Url.Action("SenderInvoices", "Operations")/${id}`, function () {
+                            $('#sender-invoices-table').DataTable();
+                        });
+                    }
+
+                }).load('@Url.Action("banks", "Operations")/', function () {
+                    $("#sender-bank").change()
+                });
 
             });
         });
