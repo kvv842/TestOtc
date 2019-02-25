@@ -47,7 +47,7 @@ namespace OperationsService.Migrations
                 Id = Guid.Parse("{264848B8-4782-4FC1-A265-D255CDE56911}"),
                 Name = "Альфабанк",
                 InterestInternalTransfer = 1,
-                InterestExternalTransfer = 2.5,
+                InterestExternalTransfer = 2.5m,
                 AdditionalActionsType = DbAdditionalActionsType.DisplayWindowConfirmingOperation
             };
 
@@ -203,15 +203,23 @@ namespace OperationsService.Migrations
                 {
                     BankId = vtbbank.Id,
                     InvoiceTypeId = individual.Id,
-                    Ammount = 5646.65,
+                    Ammount = 100000m,
                     Number = "68000000000000000001",
                 },
                 new DbInvoice
                 {
                     BankId = vtbbank.Id,
-                    InvoiceTypeId = individual.Id,
-                    Ammount = 54688686,
+                    InvoiceTypeId = nonresident.Id,
+                    Ammount = 100000,
                     Number = "68000000000000000002",
+                },
+
+                new DbInvoice
+                {
+                    BankId = alfabank.Id,
+                    InvoiceTypeId = legal.Id,
+                    Ammount = 100000,
+                    Number = "78000000000000000002",
                 },
             };
 

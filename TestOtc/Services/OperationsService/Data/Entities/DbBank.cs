@@ -17,10 +17,10 @@ namespace OperationsService.Data.Entities
         public string Name { get; set; }
 
         [Required]
-        public double InterestInternalTransfer { get; set; }
+        public decimal InterestInternalTransfer { get; set; }
 
         [Required]
-        public double InterestExternalTransfer { get; set; }
+        public decimal InterestExternalTransfer { get; set; }
 
         [Required]
         public DbAdditionalActionsType AdditionalActionsType { get; set; }

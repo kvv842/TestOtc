@@ -28,7 +28,7 @@ namespace OperationsService.Data.Entities
         public virtual DbInvoiceType InvoiceType { get; set; }
 
         [Required]
-        public double Ammount { get; set; }
+        public decimal Ammount { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

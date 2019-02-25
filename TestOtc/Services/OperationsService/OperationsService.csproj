@@ -89,10 +89,15 @@
     <Compile Include="Migrations\201902250837070_DbInvoice_RowVersion.Designer.cs">
       <DependentUpon>201902250837070_DbInvoice_RowVersion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902251637201_AmmountToDecimal.cs" />
+    <Compile Include="Migrations\201902251637201_AmmountToDecimal.Designer.cs">
+      <DependentUpon>201902251637201_AmmountToDecimal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OperationsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Helpers.cs" />
+    <Compile Include="Utils\InterestCalculator.cs" />
     <Compile Include="Validators\TransferRequestValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +111,16 @@
     <EmbeddedResource Include="Migrations\201902250837070_DbInvoice_RowVersion.resx">
       <DependentUpon>201902250837070_DbInvoice_RowVersion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251637201_AmmountToDecimal.resx">
+      <DependentUpon>201902251637201_AmmountToDecimal.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\NotificationService\NotificationService.csproj">
+      <Project>{04b2b170-3ab0-4f56-ba17-92e82d482ec5}</Project>
+      <Name>NotificationService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

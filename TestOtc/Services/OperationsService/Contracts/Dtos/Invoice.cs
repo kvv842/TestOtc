@@ -18,6 +18,6 @@ namespace OperationsService.Contracts.Dtos
         public string InvoiceType { get; set; }
 
         [JsonProperty("ammount")]
-        public double Ammount { get; set; }
+        public decimal Ammount { get; set; }
     }
 }

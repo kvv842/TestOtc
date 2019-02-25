@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "Services\Aut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationsService", "Services\OperationsService\OperationsService.csproj", "{D5238D80-27F4-40DB-9105-76D99882A146}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService", "Services\NotificationService\NotificationService.csproj", "{04B2B170-3AB0-4F56-BA17-92E82D482EC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{D5238D80-27F4-40DB-9105-76D99882A146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5238D80-27F4-40DB-9105-76D99882A146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5238D80-27F4-40DB-9105-76D99882A146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04B2B170-3AB0-4F56-BA17-92E82D482EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04B2B170-3AB0-4F56-BA17-92E82D482EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04B2B170-3AB0-4F56-BA17-92E82D482EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04B2B170-3AB0-4F56-BA17-92E82D482EC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{051A5F79-73AE-4CC3-977F-4BB25DBFA5AC} = {B46EC731-1C75-49F2-884A-922210EF3325}
 		{D5238D80-27F4-40DB-9105-76D99882A146} = {B46EC731-1C75-49F2-884A-922210EF3325}
+		{04B2B170-3AB0-4F56-BA17-92E82D482EC5} = {B46EC731-1C75-49F2-884A-922210EF3325}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {827CCABF-0D3B-47D7-BDC7-901307FE5D0A}

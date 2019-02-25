@@ -24,6 +24,6 @@ namespace OperationsService.Data.Entities
         public virtual DbInvoiceType SenderType { get; set; }
 
         [Required]
-        public double Interest { get; set; }
+        public decimal Interest { get; set; }
     }
 }

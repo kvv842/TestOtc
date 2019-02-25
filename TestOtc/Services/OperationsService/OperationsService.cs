@@ -4,6 +4,7 @@ using OperationsService.Contracts.Dtos;
 using OperationsService.Contracts.Exceptions;
 using OperationsService.Data;
 using OperationsService.Data.Entities;
+using OperationsService.Utils;
 using OperationsService.Validators;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,8 @@ namespace OperationsService
 
         public async Task TransferAsync(TransferRequest transferRequest, Guid requestUserId)
         {
+            var notificationService = new NotificationService.NotificationService();
+
             // Validation
             var validator = new TransferRequestValidator(_operationsDbContext);
             var validateResult = validator.Validate(transferRequest);
@@ -66,11 +69,17 @@ namespace OperationsService
             if (senderInvoice == null)
                 throw new TransferException("Отправитель не найден.");
 
-            if (senderInvoice.Ammount < transferRequest.Ammount)
+            // Calc interest
+            var interestCalculator = new InterestCalculator(_operationsDbContext);
+            var calcInterestedResult = await interestCalculator.CalcAsync(senderInvoice, recipientInvoice, transferRequest.Ammount);
+
+            var chargeAmount = transferRequest.Ammount + calcInterestedResult.BankInterested + calcInterestedResult.TransferInterested;
+
+            if (senderInvoice.Ammount < chargeAmount)
                 throw new TransferException("Недостаточно средств.");
 
             // Operation
-            senderInvoice.Ammount -= transferRequest.Ammount;
+            senderInvoice.Ammount -= chargeAmount;
             recipientInvoice.Ammount += transferRequest.Ammount;
 
             var dbTransaction = new DbTransation()
@@ -79,10 +88,12 @@ namespace OperationsService
                 RecipientInvoiceId = recipientInvoice.Id,
                 SenderInvoiceId = senderInvoice.Id,
                 TransferDate = DateTime.UtcNow,
-                BankInterest = 0,
-                TransferInterest = 0,
+                BankInterest = calcInterestedResult.BankInterested,
+                TransferInterest = calcInterestedResult.TransferInterested,
                 TransferUserId = requestUserId,
             };
+
+
 
             using (var transaction = _operationsDbContext.Database.BeginTransaction())
             {

@@ -24,13 +24,13 @@ namespace OperationsService.Data.Entities
         public virtual DbInvoice SenderInvoice { get; set; }
 
         [Required]
-        public double Ammount { get; set; }
+        public decimal Ammount { get; set; }
 
         [Required]
-        public double TransferInterest { get; set; }
+        public decimal TransferInterest { get; set; }
 
         [Required]
-        public double BankInterest { get; set; }
+        public decimal BankInterest { get; set; }
 
         [Required]
         public DateTime TransferDate { get; set; }

@@ -8,6 +8,6 @@ namespace OperationsService.Contracts.Dtos
 
         public Guid RecipientInvoiceId { get; set; }
 
-        public double Ammount { get; set; }
+        public decimal Ammount { get; set; }
     }
 }
