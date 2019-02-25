@@ -48,7 +48,7 @@ namespace WebApp.Controllers
 
             if (authResult.IsSuccess)
             {
-                FormsAuthentication.SetAuthCookie(authResult.Login, true);
+                FormsAuthentication.SetAuthCookie(authResult.UserId.ToString(), true);
                 return RedirectToAction("Index", "Home");
             }
 

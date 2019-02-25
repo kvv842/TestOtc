@@ -27,20 +27,10 @@ namespace OperationsService.Validators
                 .NotEmpty().WithMessage("Не указана получатель.");
 
             RuleFor(r => r)
-               .CustomAsync(async (r, context, ct) =>
+               .Custom((r, context) =>
                {
-                   var recipientInvoice = await operationsDbContext.Invoices.FirstOrDefaultAsync(a => a.Id == r.RecipientInvoiceId);
-
-                   if (recipientInvoice == null)
-                       context.AddFailure("Получатель не найден.");
-
-                   var senderInvoice = await operationsDbContext.Invoices.FirstOrDefaultAsync(a => a.Id == r.SenderInvoiceId);
-
-                   if (senderInvoice == null)
-                       context.AddFailure("Отправитель не найден.");
-
-                   if (senderInvoice.Ammount < r.Ammount)
-                       context.AddFailure("Недостаточно средств.");
+                   if (r.RecipientInvoiceId == r.SenderInvoiceId)
+                       context.AddFailure("Отправитель не может быть получателем.");
 
                });
         }

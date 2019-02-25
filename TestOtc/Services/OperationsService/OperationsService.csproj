@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201902231316273_InitDbOp.Designer.cs">
       <DependentUpon>201902231316273_InitDbOp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902250837070_DbInvoice_RowVersion.cs" />
+    <Compile Include="Migrations\201902250837070_DbInvoice_RowVersion.Designer.cs">
+      <DependentUpon>201902250837070_DbInvoice_RowVersion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OperationsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +102,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902231316273_InitDbOp.resx">
       <DependentUpon>201902231316273_InitDbOp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250837070_DbInvoice_RowVersion.resx">
+      <DependentUpon>201902250837070_DbInvoice_RowVersion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

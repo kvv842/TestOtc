@@ -5,137 +5,39 @@
 }
 
 <div class="row">
-    <h4 class="col-xs-12 text-center">Введите логин и пароль</h4>
+    <h4 class="col-md-12 text-center">Введите логин и пароль</h4>
 </div>
 <div class="row">
     @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
     {
-        <div class="form-horizontal form-widgets col-xs-4 col-xs-offset-4">
+        <div class="form-horizontal form-widgets col-md-4 col-md-offset-4">
             
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
             <div class="form-group">
-                @Html.LabelFor(m => m.Login, htmlAttributes: new { @class = "control-label col-xs-4" })
-                <div class="col-xs-8">
+                @Html.LabelFor(m => m.Login, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
                     @Html.TextBoxFor(m => m.Login, htmlAttributes: new { required = "required" })
                     @Html.ValidationMessageFor(model => model.Login)
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Password, htmlAttributes: new { @class = "control-label col-xs-4" })
-                <div class="col-xs-8">
+                @Html.LabelFor(m => m.Password, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
                     @Html.PasswordFor(m => m.Password, htmlAttributes: new { required = "required" })
                     @Html.ValidationMessageFor(model => model.Password)
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-xs-offset-4 col-xs-10">
-                    <input type="submit" class="btn btn-default" value="Войти" />
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" class="btn btn-dark" value="Войти" />
                 </div>
             </div>
         </div>
     }
 </div>
-@*@section Scripts {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                jQuery(function ($) {
-                    /////////////////////
-                    ////  UI Elements
-                    ////
-                    ////UI Buttonsets for navigation, radios, and checkboxes
-                    //$('input[type=radio],input[type=checkbox]').parent().buttonset();
-                    ////
-                    ////UI Buttons
-                    //$("button,input[type=submit],input[type=reset]").button();
-                    ////
-                    ////UI Select Menu with validation
-                    //$("#food1a").selectmenu({
-                    //    width: 225,
-                    //    //jQuery UI hides the actual <select> tags, calling on the change event allows you to validate
-                    //    change: function () {
-                    //        $(this).valid();
-                    //    }
-                    //});
-                    ////
-                    ////UI Button with css for text inputs
-                    //$("input[type=text]").button().css({
-                    //    "text-align": "left",
-                    //    "cursor": "text",
-                    //});
-                    ////
-                    ////UI Style the form table
-                    //$("table").addClass("ui-widget ui-widget-content ui-corner-all");
-                    ////
-                    ////UI Dialog
-                    //$("#dialog1a,#dialog1b").dialog({
-                    //    autoOpen: false,
-                    //    show: {
-                    //        effect: "fold",
-                    //        duration: "slow"
-                    //    },
-                    //    hide: {
-                    //        effect: "clip"
-                    //    },
-                    //    title: "Instructions",
-                    //    width: 400,
-                    //    modal: true,
-                    //});
-                    ////dialog opener for instructions 1a
-                    //$("#instructions1a").click(function (e) {
-                    //    $("#dialog1a").dialog("open");
-                    //});
-                    ////
-                    ////  End of UI Elements
-                    //////////////////////////
-
-                    //////////////////////////
-                    ////  jQuery form validation
-                    ////
-                    //// Full names only with optional prefix and suffix
-                    //$.validator.addMethod("fullName", function (value, element) {
-                    //    return this.optional(element) || /([a-z]{2}\.\s)?([a-z]+\s[a-z]+[^0-9\/\*\+])([a-z]+\.)?/i.test(value);
-                    //}, 'Please enter your full name (preffix/suffixes are optional).');
-                    $("#formauth").validate({
-                        //required to validate jQuery UI select menu
-                        ignore: [],
-                        //rules for all form fields
-                        rules: {
-                            login: { required: true, },
-                            pasword2: { required: true, },
-                            food1a_1: {
-                                required: function (element) {
-                                    return $("#food1a").val() == 1;
-                                }
-                            }
-                        },
-                        errorPlacement: function (error, element) {
-                            if (element.is(":radio") || element.is(":checkbox")) {
-                                error.appendTo(element.parent());
-                            } else if (element.is("select")) {
-                                error.appendTo(element.parent().next());
-                            } else {
-                                error.insertAfter(element);
-                            }
-                        },
-                        errorClass: "ui-tooltip ui-widget ui-corner-all ui-widget-content",
-                        errorElement: "span",
-                        highlight: function (element, errorClass, validClass) { $(element).addClass("ui-widget-content").removeClass(validClass); },
-                        unhighlight: function (element, errorClass, validClass) { $(element).removeClass("ui-widget-content").addClass(validClass); },
-                    });
-    //
-    //  End of Form Validation
-    ///////////////////////////////
-
-                    console.log('wer');
-
-                });
-            });
-        </script>
-
-    }*@
 
 
 

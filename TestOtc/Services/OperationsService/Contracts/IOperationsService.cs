@@ -13,6 +13,6 @@ namespace OperationsService.Contracts
 
         Task<IList<Invoice>> GetRecipientInvoicesAsync(Guid bankId, Guid senderInvoiceId);
 
-        Task TransferAsync(TransferRequest transferRequest);
+        Task TransferAsync(TransferRequest transferRequest, Guid requestUserId);
     }
 }

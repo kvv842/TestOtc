@@ -29,5 +29,8 @@ namespace OperationsService.Data.Entities
 
         [Required]
         public double Ammount { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

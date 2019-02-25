@@ -11,5 +11,10 @@ namespace OperationsService.Contracts.Exceptions
         {
             Messages = messages;
         }
+
+        public TransferException(string message): base(message)
+        {
+            Messages = new List<string> { message };
+        }
     }
 }
