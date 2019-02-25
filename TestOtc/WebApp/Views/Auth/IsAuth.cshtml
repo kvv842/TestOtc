@@ -2,9 +2,9 @@
 
 @if (!Model.IsAuthen)
 {
-    @Html.ActionLink("Войти", "Login", "Auth");
+    @Html.ActionLink("Войти", "Login", "Auth", new { area = "" }, new { @class = "nav-link" });
 }
 else
 {
-    @Html.ActionLink("Выйти", "Logout", "Auth");
+    @Html.ActionLink("Выйти", "Logout", "Auth", new { area = "" }, new { @class = "nav-link" });
 }
