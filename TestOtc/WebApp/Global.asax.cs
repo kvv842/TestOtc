@@ -28,8 +28,8 @@ namespace WebApp
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // Инициализация БД
-            //AuthService.Utils.Helpers.InitializerDb();
-            //OperationsService.Utils.Helpers.InitializerDb();
+            AuthService.Utils.Helpers.InitializerDb();
+            OperationsService.Utils.Helpers.InitializerDb();
 
             // Инициализация AutoMapper
             Mapper.Initialize(configurationExpression =>

@@ -1,8 +1,6 @@
 ﻿using OperationsService.Contracts.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OperationsService.Contracts
@@ -10,14 +8,11 @@ namespace OperationsService.Contracts
     public interface IOperationsService
     {
         Task<IList<Bank>> GetBanksAsync();
-<<<<<<< HEAD
 
         Task<IList<Invoice>> GetSenderInvoicesAsync(Guid bankId);
 
         Task<IList<Invoice>> GetRecipientInvoicesAsync(Guid bankId, Guid senderInvoiceId);
 
         Task TransferAsync(TransferRequest transferRequest);
-=======
->>>>>>> parent of b66fb6d... Add invoices
     }
 }

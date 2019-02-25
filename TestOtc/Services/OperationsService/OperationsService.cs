@@ -28,7 +28,6 @@ namespace OperationsService
             var banks = Mapper.Map<IList<Bank>>(dbBanks);
             return banks;
         }
-<<<<<<< HEAD
 
         public async Task<IList<Invoice>> GetSenderInvoicesAsync(Guid bankId)
         {
@@ -54,7 +53,5 @@ namespace OperationsService
 
             await Task.CompletedTask;
         }
-=======
->>>>>>> parent of b66fb6d... Add invoices
     }
 }

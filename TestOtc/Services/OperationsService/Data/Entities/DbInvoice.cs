@@ -11,6 +11,7 @@ namespace OperationsService.Data.Entities
         [Key]
         public Guid Id { get; set; }
 
+        [Index("IX_oper_Invoice_Number", 1, IsUnique = true)]
         [Required]
         [MaxLength(20)]
         public string Number { get; set; }
