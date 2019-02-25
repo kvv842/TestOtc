@@ -17,7 +17,7 @@ namespace WebApp.Controllers.Api
         }
 
         // GET: Operations
-        public async Task<IEnumerable<Bank>> GetBanksAsync()
+        public async Task<IList<Bank>> GetBanksAsync()
         {
             var banks = await _operationsService.GetBanksAsync();
             return banks;

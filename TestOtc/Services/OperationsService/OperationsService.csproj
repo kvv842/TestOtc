@@ -68,8 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Contracts\Dtos\TransferRequest.cs" />
     <Compile Include="Contracts\Dtos\Invoice.cs" />
+=======
+>>>>>>> parent of b66fb6d... Add invoices
     <Compile Include="Contracts\Dtos\Bank.cs" />
     <Compile Include="Contracts\Exceptions\TransferException.cs" />
     <Compile Include="Contracts\IOperationsService.cs" />
@@ -81,9 +84,9 @@
     <Compile Include="Data\Entities\Enums\DbAdditionalActionsType.cs" />
     <Compile Include="Data\OperationsDbContext.cs" />
     <Compile Include="Mapping\MapperProfileToDTO.cs" />
-    <Compile Include="Migrations\201902231316273_InitDbOp.cs" />
-    <Compile Include="Migrations\201902231316273_InitDbOp.Designer.cs">
-      <DependentUpon>201902231316273_InitDbOp.cs</DependentUpon>
+    <Compile Include="Migrations\201902230654075_InitDbOp.cs" />
+    <Compile Include="Migrations\201902230654075_InitDbOp.Designer.cs">
+      <DependentUpon>201902230654075_InitDbOp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OperationsService.cs" />
@@ -95,9 +98,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902231316273_InitDbOp.resx">
-      <DependentUpon>201902231316273_InitDbOp.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902230654075_InitDbOp.resx">
+      <DependentUpon>201902230654075_InitDbOp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

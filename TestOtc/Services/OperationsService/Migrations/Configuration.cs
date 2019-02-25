@@ -24,36 +24,28 @@ namespace OperationsService.Migrations
             //  to avoid creating duplicate seed data.
 
             // Banks
-            var sberbank = new DbBank
-            {
-                Id = Guid.Parse("{569E5810-82BD-498C-AB21-2E1E8593A7F0}"),
-                Name = "Сбербанк",
-                InterestInternalTransfer = 0,
-                InterestExternalTransfer = 1,
-                AdditionalActionsType = DbAdditionalActionsType.SendTransactionsTaxOffice
-            };
-
-            var vtbbank = new DbBank
-            {
-                Id = Guid.Parse("{00C7DA8B-A7BE-446D-AD5F-E41AF650B576}"),
-                Name = "Втб",
-                InterestInternalTransfer = 0,
-                InterestExternalTransfer = 2,
-                AdditionalActionsType = DbAdditionalActionsType.SendTransactionPartnerBank
-            };
-
-            var alfabank = new DbBank
-            {
-                Id = Guid.Parse("{264848B8-4782-4FC1-A265-D255CDE56911}"),
-                Name = "Альфабанк",
-                InterestInternalTransfer = 1,
-                InterestExternalTransfer = 2.5,
-                AdditionalActionsType = DbAdditionalActionsType.DisplayWindowConfirmingOperation
-            };
-
             var banks = new List<DbBank>
             {
-                sberbank, vtbbank, alfabank
+                new DbBank {
+                    Name = "Сбербанк",
+                    InterestInternalTransfer = 0,
+                    InterestExternalTransfer = 1,
+                    AdditionalActionsType = DbAdditionalActionsType.SendTransactionsTaxOffice
+                },
+
+                new DbBank {
+                    Name = "Втб",
+                    InterestInternalTransfer = 0,
+                    InterestExternalTransfer = 2,
+                    AdditionalActionsType = DbAdditionalActionsType.SendTransactionPartnerBank
+                },
+
+                new DbBank {
+                    Name = "Альфабанк",
+                    InterestInternalTransfer = 1,
+                    InterestExternalTransfer = 2.5,
+                    AdditionalActionsType = DbAdditionalActionsType.DisplayWindowConfirmingOperation
+                },
             };
 
             banks.ForEach(s => context.Banks.AddOrUpdate(p => p.Name, s));
@@ -90,6 +82,7 @@ namespace OperationsService.Migrations
 
             matrix.ForEach(s => context.Matrices.AddOrUpdate(p => p.Id, s));
 
+<<<<<<< HEAD
             var invoices = new List<DbInvoice>
             {
                 new DbInvoice
@@ -217,6 +210,8 @@ namespace OperationsService.Migrations
 
             invoices.ForEach(s => context.Invoices.AddOrUpdate(p => p.Number, s));
 
+=======
+>>>>>>> parent of b66fb6d... Add invoices
             context.SaveChanges();
         }
     }

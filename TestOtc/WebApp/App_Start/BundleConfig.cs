@@ -17,11 +17,17 @@ namespace WebApp
             bundles.Add(new ScriptBundle("~/bundles/jqueryunajax").Include(
                         "~/Scripts/jquery.unobtrusive-ajax*"));
 
+<<<<<<< HEAD
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                        "~/Scripts/datatables.min.js"));
+=======
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+                        "~/Scripts/kendo.forms.min.js"
+                        ));
+>>>>>>> parent of b66fb6d... Add invoices
 
             // Используйте версию Modernizr для разработчиков, чтобы учиться работать. Когда вы будете готовы перейти к работе,
             // готово к выпуску, используйте средство сборки по адресу https://modernizr.com, чтобы выбрать только необходимые тесты.

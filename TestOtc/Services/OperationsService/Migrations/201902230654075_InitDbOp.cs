@@ -32,7 +32,6 @@ namespace OperationsService.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("oper.Bank", t => t.BankId, cascadeDelete: false)
                 .ForeignKey("oper.InvoiceType", t => t.InvoiceTypeId, cascadeDelete: false)
-                .Index(t => t.Number, unique: true, name: "IX_oper_Invoice_Number")
                 .Index(t => t.BankId)
                 .Index(t => t.InvoiceTypeId);
             
@@ -96,7 +95,6 @@ namespace OperationsService.Migrations
             DropIndex("oper.MatrixInvoices", new[] { "RecipientTypeId" });
             DropIndex("oper.Invoice", new[] { "InvoiceTypeId" });
             DropIndex("oper.Invoice", new[] { "BankId" });
-            DropIndex("oper.Invoice", "IX_oper_Invoice_Number");
             DropTable("oper.Transations");
             DropTable("oper.MatrixInvoices");
             DropTable("oper.InvoiceType");
