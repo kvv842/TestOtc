@@ -58,20 +58,27 @@ namespace WebApp.Controllers
             {
                 var transferRequest = Mapper.Map<TransferRequest>(transferModel);
 
-                try
+                if (Guid.TryParse(HttpContext.User.Identity.Name, out Guid userId))
                 {
-                    await _operationsService.TransferAsync(transferRequest);
-                }
-                catch (TransferException ex)
-                {
-                    return Json(new { success = false, m = string.Join(",", ex.Messages) });
-                }
-                catch (Exception ex)
-                {
-                    return Json(new { success = false, m = ex.Message });
-                }
+                    try
+                    {
+                        await _operationsService.TransferAsync(transferRequest, userId);
+                    }
+                    catch (TransferException ex)
+                    {
+                        return Json(new { success = false, m = string.Join(",", ex.Messages) });
+                    }
+                    catch (Exception ex)
+                    {
+                        return Json(new { success = false, m = ex.Message });
+                    }
 
-                return Json(new { success = true });
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
             }
             else
             {

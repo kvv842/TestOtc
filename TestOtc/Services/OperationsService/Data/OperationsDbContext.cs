@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace OperationsService.Data
 {
-    public class OperationsDbContext: DbContext
+    public class OperationsDbContext : DbContext
     {
         public DbSet<DbBank> Banks { get; set; }
         public DbSet<DbInvoiceType> InvoiceTypes { get; set; }
@@ -12,5 +12,11 @@ namespace OperationsService.Data
         public DbSet<DbTransation> Transations { get; set; }
 
         public OperationsDbContext() : base("OperationsDbContext") { }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DbInvoice>()
+                .Property(p => p.RowVersion).IsConcurrencyToken();
+        }
     }
 }
