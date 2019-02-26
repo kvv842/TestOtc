@@ -22,14 +22,17 @@ namespace AuthService.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            var users = new List<DbUser>
+            if (!context.Users.Any())
             {
-                new DbUser { Login = "login",   Password = "123" },
-            };
+                var users = new List<DbUser>
+                {
+                    new DbUser { Login = "login",   Password = "123" },
+                };
 
-            users.ForEach(s => context.Users.AddOrUpdate(p => p.Login, s));
+                users.ForEach(s => context.Users.Add(s));
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
         }
     }
 }

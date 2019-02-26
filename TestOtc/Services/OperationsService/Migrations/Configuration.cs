@@ -23,57 +23,59 @@ namespace OperationsService.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            // Banks
-            var sberbank = new DbBank
+            if (!context.Banks.Any())
             {
-                Id = Guid.Parse("{569E5810-82BD-498C-AB21-2E1E8593A7F0}"),
-                Name = "Сбербанк",
-                InterestInternalTransfer = 0,
-                InterestExternalTransfer = 1,
-                AdditionalActionsType = DbAdditionalActionsType.SendTransactionsTaxOffice
-            };
+                // Banks
+                var sberbank = new DbBank
+                {
+                    Id = Guid.Parse("{569E5810-82BD-498C-AB21-2E1E8593A7F0}"),
+                    Name = "Сбербанк",
+                    InterestInternalTransfer = 0,
+                    InterestExternalTransfer = 1,
+                    AdditionalActionsType = DbAdditionalActionsType.SendTransactionsTaxOffice
+                };
 
-            var vtbbank = new DbBank
-            {
-                Id = Guid.Parse("{00C7DA8B-A7BE-446D-AD5F-E41AF650B576}"),
-                Name = "Втб",
-                InterestInternalTransfer = 0,
-                InterestExternalTransfer = 2,
-                AdditionalActionsType = DbAdditionalActionsType.SendTransactionPartnerBank
-            };
+                var vtbbank = new DbBank
+                {
+                    Id = Guid.Parse("{00C7DA8B-A7BE-446D-AD5F-E41AF650B576}"),
+                    Name = "Втб",
+                    InterestInternalTransfer = 0,
+                    InterestExternalTransfer = 2,
+                    AdditionalActionsType = DbAdditionalActionsType.SendTransactionPartnerBank
+                };
 
-            var alfabank = new DbBank
-            {
-                Id = Guid.Parse("{264848B8-4782-4FC1-A265-D255CDE56911}"),
-                Name = "Альфабанк",
-                InterestInternalTransfer = 1,
-                InterestExternalTransfer = 2.5m,
-                AdditionalActionsType = DbAdditionalActionsType.DisplayWindowConfirmingOperation
-            };
+                var alfabank = new DbBank
+                {
+                    Id = Guid.Parse("{264848B8-4782-4FC1-A265-D255CDE56911}"),
+                    Name = "Альфабанк",
+                    InterestInternalTransfer = 1,
+                    InterestExternalTransfer = 2.5m,
+                    AdditionalActionsType = DbAdditionalActionsType.DisplayWindowConfirmingOperation
+                };
 
-            var banks = new List<DbBank>
+                var banks = new List<DbBank>
             {
                 sberbank, vtbbank, alfabank
             };
 
-            banks.ForEach(s => context.Banks.AddOrUpdate(p => p.Name, s));
+                banks.ForEach(s => context.Banks.AddOrUpdate(p => p.Name, s));
 
 
-            // DbInvoiceType
-            var individual = new DbInvoiceType { Id = Guid.NewGuid(), Name = "Физическое лицо", };
-            var legal = new DbInvoiceType { Id = Guid.NewGuid(), Name = "Юридическое лицо", };
-            var nonresident = new DbInvoiceType { Id = Guid.NewGuid(), Name = "Нерезидент", };
+                // DbInvoiceType
+                var individual = new DbInvoiceType { Id = Guid.NewGuid(), Name = "Физическое лицо", };
+                var legal = new DbInvoiceType { Id = Guid.NewGuid(), Name = "Юридическое лицо", };
+                var nonresident = new DbInvoiceType { Id = Guid.NewGuid(), Name = "Нерезидент", };
 
-            var invoiceTypes = new List<DbInvoiceType>
+                var invoiceTypes = new List<DbInvoiceType>
             {
                 individual,
                 legal,
                 nonresident,
             };
 
-            invoiceTypes.ForEach(s => context.InvoiceTypes.AddOrUpdate(p => p.Name, s));
+                invoiceTypes.ForEach(s => context.InvoiceTypes.AddOrUpdate(p => p.Name, s));
 
-            var matrix = new List<DbMatrixInvoiceTypes>
+                var matrix = new List<DbMatrixInvoiceTypes>
             {
                 new DbMatrixInvoiceTypes{ Id = Guid.Parse("{A538953A-169C-400D-B686-CEFD66FE9332}"), SenderTypeId = individual.Id, RecipientTypeId = individual.Id, Interest = 0 },
                 new DbMatrixInvoiceTypes{ Id = Guid.Parse("{1B829439-7FF2-46DA-95FC-0A4955F0E1E3}"), SenderTypeId = individual.Id, RecipientTypeId = legal.Id, Interest = 2 },
@@ -88,9 +90,9 @@ namespace OperationsService.Migrations
                 new DbMatrixInvoiceTypes{ Id = Guid.Parse("{C996F506-8453-487D-80FE-F41991041368}"), SenderTypeId = nonresident.Id, RecipientTypeId = nonresident.Id, Interest = 6 },
             };
 
-            matrix.ForEach(s => context.Matrices.AddOrUpdate(p => p.Id, s));
+                matrix.ForEach(s => context.Matrices.AddOrUpdate(p => p.Id, s));
 
-            var invoices = new List<DbInvoice>
+                var invoices = new List<DbInvoice>
             {
                 new DbInvoice
                 {
@@ -223,9 +225,10 @@ namespace OperationsService.Migrations
                 },
             };
 
-            invoices.ForEach(s => context.Invoices.AddOrUpdate(p => p.Number, s));
+                invoices.ForEach(s => context.Invoices.AddOrUpdate(p => p.Number, s));
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
         }
     }
 }
