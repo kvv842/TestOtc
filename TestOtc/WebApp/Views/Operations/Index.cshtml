@@ -2,9 +2,11 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Operation</h2>
-
+<div class="row mt-4 mb-2 text-center">
+    <div class="form-horizontal form-widgets col-md-12">
+        <h2>Операции</h2>
+    </div>
+</div>
 <div class="row">
     <div class="form-horizontal form-widgets col-md-12">
 
@@ -70,12 +72,12 @@
                     </div>
                     <div class="form-group">
                         <label for="ammount" class="col-form-label">Сумма перевода:</label>
-                        <input type="number" class="form-control" name="ammount" required>
+                        <input type="number" class="form-control" name="ammount" id="ammount" required>
                     </div>
                 }
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-primary" id="btn-transfer">Перевести</button>
             </div>
         </div>
@@ -95,8 +97,10 @@
                         type: "POST",
                         data: postData,
                         success: function (data, textStatus, jqXHR) {
-                            if (data.success)
+                            if (data.success) {
                                 $('#transferModal').modal('toggle');
+                                GetSenderInvoices();
+                            }
                             else
                                 alert(data.m);
                         },
@@ -119,6 +123,7 @@
 
                     modal.find('#sender-invoice-id').val(sender_invoice_id);
                     modal.find('#sender-invoice-number').val(button.data('sender-invoice-number'));
+                    modal.find('#ammount').val('');
 
                     $("#recipient-bank").on('change', function () {
                         var id = $("#recipient-bank option:selected").attr('id');
@@ -145,18 +150,20 @@
                 });
 
                 $("#sender-bank").on('change', function () {
-                    var id = $("#sender-bank option:selected").attr('id');
+                    GetSenderInvoices();
+                }).load('@Url.Action("banks", "Operations")/', function () {
+                    $("#sender-bank").change()
+                    });
 
+                function GetSenderInvoices() {
+                    var id = $("#sender-bank option:selected").attr('id');
                     if (id != null) {
                         $('#sender-invoices-table').DataTable().destroy();
                         $("#sender-invoices-tbody").load(`@Url.Action("SenderInvoices", "Operations")/${id}`, function () {
                             $('#sender-invoices-table').DataTable();
                         });
                     }
-
-                }).load('@Url.Action("banks", "Operations")/', function () {
-                    $("#sender-bank").change()
-                });
+                }
 
             });
         });

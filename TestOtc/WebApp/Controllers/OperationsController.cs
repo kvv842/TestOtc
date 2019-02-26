@@ -77,12 +77,12 @@ namespace WebApp.Controllers
                 }
                 else
                 {
-                    return Json(new { success = false });
+                    throw new UnauthorizedAccessException();
                 }
             }
             else
             {
-                return Json(new { success = false });
+                return Json(new { success = false, m = "Ошибка ввода данных." });
             }
         }
 

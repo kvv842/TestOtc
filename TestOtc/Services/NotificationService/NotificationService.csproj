@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\Dtos\INotification.cs" />
+    <Compile Include="Contracts\Dtos\Notification.cs" />
     <Compile Include="Contracts\INotificationService.cs" />
     <Compile Include="NotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

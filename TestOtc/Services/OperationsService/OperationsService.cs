@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NotificationService.Contracts;
 using OperationsService.Contracts;
 using OperationsService.Contracts.Dtos;
 using OperationsService.Contracts.Exceptions;
@@ -8,11 +9,9 @@ using OperationsService.Utils;
 using OperationsService.Validators;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OperationsService
@@ -20,9 +19,11 @@ namespace OperationsService
     public class OperationsService: IOperationsService
     {
         private readonly OperationsDbContext _operationsDbContext;
+        private readonly INotificationService _notificationService;
 
-        public OperationsService(OperationsDbContext operationsDbContext)
+        public OperationsService(OperationsDbContext operationsDbContext, INotificationService notificationService)
         {
+            _notificationService = notificationService;
             _operationsDbContext = operationsDbContext;
         }
 
@@ -59,24 +60,38 @@ namespace OperationsService
                 throw new TransferException(validateResult.Errors.Select(a => a.ErrorMessage));
 
             // Get data for operation
-            var recipientInvoice = await _operationsDbContext.Invoices.FirstOrDefaultAsync(a => a.Id == transferRequest.RecipientInvoiceId);
+            var recipientInvoice = await _operationsDbContext.Invoices
+                .Include(a => a.Bank)
+                .Include(a => a.InvoiceType)
+                .FirstOrDefaultAsync(a => a.Id == transferRequest.RecipientInvoiceId);
 
             if (recipientInvoice == null)
                 throw new TransferException("Получатель не найден.");
 
-            var senderInvoice = await _operationsDbContext.Invoices.FirstOrDefaultAsync(a => a.Id == transferRequest.SenderInvoiceId);
+            var senderInvoice = await _operationsDbContext.Invoices
+                .Include(a => a.Bank)
+                .FirstOrDefaultAsync(a => a.Id == transferRequest.SenderInvoiceId);
 
             if (senderInvoice == null)
                 throw new TransferException("Отправитель не найден.");
 
-            // Calc interest
-            var interestCalculator = new InterestCalculator(_operationsDbContext);
-            var calcInterestedResult = await interestCalculator.CalcAsync(senderInvoice, recipientInvoice, transferRequest.Ammount);
+            var dbMatrix = await _operationsDbContext.Matrices
+                                             .FirstOrDefaultAsync(a => a.SenderTypeId == senderInvoice.InvoiceTypeId
+                                                               && a.RecipientTypeId == recipientInvoice.InvoiceTypeId);
 
-            var chargeAmount = transferRequest.Ammount + calcInterestedResult.BankInterested + calcInterestedResult.TransferInterested;
+            if (dbMatrix == null)
+                throw new TransferException("Нет матрицы для расчета комиссии.");
+
+            // Calc interest
+            var bankInterested = Helpers.CalcBankInterested(senderInvoice.Bank, senderInvoice, recipientInvoice, transferRequest.Ammount);
+            var transferInterested = Helpers.CalcTransferInterested(dbMatrix, transferRequest.Ammount);
+
+            var chargeAmount = transferRequest.Ammount + bankInterested + transferInterested;
 
             if (senderInvoice.Ammount < chargeAmount)
                 throw new TransferException("Недостаточно средств.");
+
+            var notifications = Helpers.CreateNotifications(recipientInvoice.InvoiceType, senderInvoice.Bank);
 
             // Operation
             senderInvoice.Ammount -= chargeAmount;
@@ -88,12 +103,10 @@ namespace OperationsService
                 RecipientInvoiceId = recipientInvoice.Id,
                 SenderInvoiceId = senderInvoice.Id,
                 TransferDate = DateTime.UtcNow,
-                BankInterest = calcInterestedResult.BankInterested,
-                TransferInterest = calcInterestedResult.TransferInterested,
+                BankInterest = bankInterested,
+                TransferInterest = transferInterested,
                 TransferUserId = requestUserId,
             };
-
-
 
             using (var transaction = _operationsDbContext.Database.BeginTransaction())
             {
@@ -102,7 +115,7 @@ namespace OperationsService
                     _operationsDbContext.Transations.Add(dbTransaction);
                     await _operationsDbContext.SaveChangesAsync();
 
-                    // Call notification
+                    await notificationService.SendAsync(notifications);
 
                     transaction.Commit();
                 }

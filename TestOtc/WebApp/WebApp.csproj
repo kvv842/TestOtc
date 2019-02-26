@@ -195,8 +195,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Api\InvoicesController.cs" />
-    <Compile Include="Controllers\Api\BanksController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OperationsController.cs" />
@@ -326,8 +324,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Auth\IsAuth.cshtml" />
@@ -348,7 +344,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Invoices\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -359,6 +354,10 @@
     <ProjectReference Include="..\Services\AuthService\AuthService.csproj">
       <Project>{051a5f79-73ae-4cc3-977f-4bb25dbfa5ac}</Project>
       <Name>AuthService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\NotificationService\NotificationService.csproj">
+      <Project>{04b2b170-3ab0-4f56-ba17-92e82d482ec5}</Project>
+      <Name>NotificationService</Name>
     </ProjectReference>
     <ProjectReference Include="..\Services\OperationsService\OperationsService.csproj">
       <Project>{d5238d80-27f4-40db-9105-76d99882a146}</Project>

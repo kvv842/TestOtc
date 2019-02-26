@@ -1,5 +1,6 @@
 ﻿using AuthService.Contracts;
 using Ninject.Modules;
+using NotificationService.Contracts;
 using OperationsService.Contracts;
 
 namespace WebApp.IoC
@@ -10,6 +11,7 @@ namespace WebApp.IoC
         {
             Bind<IAuthService>().To<AuthService.AuthService>();
             Bind<IOperationsService>().To<OperationsService.OperationsService>();
+            Bind<INotificationService>().To<NotificationService.NotificationService>();
         }
     }
 }

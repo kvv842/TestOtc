@@ -6,6 +6,6 @@ namespace NotificationService.Contracts
 {
     public interface INotificationService
     {
-        Task SendAsync(IEnumerable<INotification> notifications);
+        Task SendAsync(IEnumerable<Notification> notifications);
     }
 }
