@@ -127,7 +127,7 @@ namespace OperationsService
                 catch (Exception)
                 {
                     transaction.Rollback();
-                    throw new TransferException("Произошла сситемная ошибка.");
+                    throw new TransferException("Произошла системная ошибка.");
                 }
             }
         }
